@@ -18,6 +18,8 @@ ASCharacter::ASCharacter() {
 	CameraComp = CreateDefaultSubobject<UCameraComponent>("CameraComp");
 	CameraComp->SetupAttachment(SpringArmComp);
 
+	InteractionComp = CreateDefaultSubobject<USInteractionComponent>("InteractionComp");
+
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 
 	bUseControllerRotationYaw = false;
@@ -47,6 +49,7 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 
 	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &ASCharacter::PrimaryAttack);
+	PlayerInputComponent->BindAction("PrimaryInteract", IE_Pressed, this, &ASCharacter::PrimaryInteract);
 
 }
 
@@ -77,4 +80,10 @@ void ASCharacter::PrimaryAttack() {
 	SpawnParms.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	
 	GetWorld()->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParms);
+}
+
+void ASCharacter::PrimaryInteract() {
+	if (InteractionComp) {
+		InteractionComp->PrimaryInteract();
+	}
 }
