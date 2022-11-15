@@ -16,14 +16,14 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	float TargetPitch;
-	
-	void Interact_Implementation(APawn* InstigatorPawn) override;
+
+	virtual void Interact_Implementation(APawn* InstigatorPawn) override;
 
 protected:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* BaseMesh;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* LidMesh;
 	
 public:	
