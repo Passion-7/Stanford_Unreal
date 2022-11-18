@@ -30,20 +30,6 @@ ASExplosiveBarrel::ASExplosiveBarrel()
 
 }
 
-// Called when the game starts or when spawned
-void ASExplosiveBarrel::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void ASExplosiveBarrel::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void ASExplosiveBarrel::PostInitializeComponents() {
 	// Don't forget to call parent function
 	Super::PostInitializeComponents();
@@ -54,4 +40,10 @@ void ASExplosiveBarrel::PostInitializeComponents() {
 void ASExplosiveBarrel::OnActorHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
 	ForceComp->FireImpulse();
+
+	UE_LOG(LogTemp, Log, TEXT("OnActorHit in Explolsive Barrel"));
+	UE_LOG(LogTemp, Warning, TEXT("Other Actor: %s, at gmae time: %f"), *GetNameSafe(OtherActor), GetWorld()->TimeSeconds);
+
+	FString CombineString = FString::Printf(TEXT("Hit at location: %s"), *Hit.ImpactPoint.ToString());
+	DrawDebugString(GetWorld(), Hit.ImpactPoint, CombineString, nullptr, FColor::Green, 2.0f, true);
 }
