@@ -65,7 +65,11 @@ protected:
 	void Dash();
 	void Dash_TimeElapsed();
 	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
-	
+
+	UFUNCTION()
+	void OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComponent, float NewHealth, float Delta);
+
+	virtual void PostInitializeComponents() override;
 
 public:	
 	// Called every frame

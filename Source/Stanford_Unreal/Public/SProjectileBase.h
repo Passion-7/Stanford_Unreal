@@ -31,7 +31,7 @@ protected:
 
 	// BlueprintNativeEvent = C++ base implementation, can be expanded in blueprints
 	// BlueprintCallable to allow child classes to trigger explosions
-	// Not required for assignment, useful for expanding in blueprint late on
+	// Not required for assignment, useful for expanding in blueprint later on
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Explode();
 
